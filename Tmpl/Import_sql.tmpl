@@ -1,0 +1,16 @@
+imports:
+  - path: Jinja/cloudsql.jinja
+    name: cloudsql.jinja
+
+resources:
+  - name: ${SQL_INSTANCE}
+    type: cloudsql.jinja
+    properties:
+      region: ${SQL_INSTANCE_REGION}
+      zone: ${SQL_INSTANCE_ZONE}
+      # Cloud SQL data disk
+      dataDiskSizeGb: ${SQL_DATA_DISK}
+      # Cloud SQL password for root user
+      rootpass: ${SQL_ROOT_PASSWORD}
+      machinetype: db-f1-micro
+      sqlimportstructure: ${SQL_DUMP_FILE}
