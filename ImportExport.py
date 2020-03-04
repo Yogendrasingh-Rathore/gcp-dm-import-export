@@ -74,6 +74,6 @@ def enable_gcloud_apis():
     return True
 
 api_enable_choice = raw_input("Do you want to enable Api's: ")
-if api_enable_choice == 'yes' or 'YES' or 'y' or 'Y':
+if api_enable_choice == 'yes' or api_enable_choice == 'YES' or api_enable_choice == 'y' or api_enable_choice == 'Y':
     enable_gcloud_apis()
 create_dm()
