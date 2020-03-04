@@ -104,6 +104,25 @@ resources:
   {% endif %}
 {% endif %}
 
+{% if properties['sqlexportstructure'] %}
+- name: {{ ID }}-export-structure
+  action: gcp-types/sqladmin-v1beta4:sql.instances.export
+  properties:
+    instance: {{ ID }}-master
+    project: {{ env['project'] }}
+    exportContext:
+      kind: sql#exportContext
+      fileType: SQL
+      uri: {{ properties['sqlexportstructure'] }}
+  metadata:
+    dependsOn:
+  {% if properties['users'] %}
+      - {{ ID }}-user-{{ properties['users'][(properties['users']| length) - 1]['name'] }}
+  {% else %}
+      - {{ ID }}-user-root
+  {% endif %}
+{% endif %}
+
 outputs:
   - name: {{ ID }}-master-ip
     value: $(ref.{{ ID }}-master.ipAddresses[0].ipAddress)
